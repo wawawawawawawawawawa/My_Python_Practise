@@ -26,7 +26,7 @@ def main():
     udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     # 2. 绑定本地信息
-    udp_socket.bind(("", 7890))
+    udp_socket.bind(("", 7891))
 
     # 3. 获取对方的ip
     dest_ip = input("请输入对方的ip:")

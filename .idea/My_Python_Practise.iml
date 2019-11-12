@@ -2,7 +2,10 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/WSGI_mini-web框架" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/WSGI_mini-web框架/2.web服务器里集成了解析动态请求的功能" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/WSGI_mini-web框架/2.web服务器里集成了解析动态请求的功能/test" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
