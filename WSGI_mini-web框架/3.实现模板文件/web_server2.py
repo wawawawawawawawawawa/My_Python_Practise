@@ -123,6 +123,7 @@ def main():
         print("python3 xxxx.py 7890 mini_frame:application")
         return
     ret = re.match(r"([^:]+):(.*)", frame_app_name)
+    print(ret)
     if ret:
         frame_name = ret.group(1)  # mini_frame
         app_name = ret.group(2)  # application
