@@ -7,7 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/WSGI_mini-web框架/2.web服务器里集成了解析动态请求的功能" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/WSGI_mini-web框架/2.web服务器里集成了解析动态请求的功能/test" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">
