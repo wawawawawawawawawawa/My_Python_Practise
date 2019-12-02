@@ -17,7 +17,7 @@ while True:
 
     for client_socket in client_list:
         try:
-            recv_data = new_socket.recv(1024)
+            recv_data = new_socket.recv(1024).decode("utf-8")
         except Exception as ret:
             print("没有数据到来")
         else:
