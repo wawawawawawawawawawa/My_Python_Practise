@@ -29,7 +29,7 @@ class WSGIServer(object):
 
         request_lines = request.splitlines()
         print("")
-        print(">"*20)
+        print(">" * 20)
         print(request_lines)
 
         # GET /index.html HTTP/1.1
@@ -80,10 +80,9 @@ class WSGIServer(object):
 
             header += "\r\n"
 
-            response = header+body
+            response = header + body
             # 发送response给浏览器
             new_socket.send(response.encode("utf-8"))
-
 
         # 关闭套接
         new_socket.close()
@@ -92,7 +91,6 @@ class WSGIServer(object):
         self.status = status
         self.headers = [("server", "mini_web v8.8")]
         self.headers += headers
-        
 
     def run_forever(self):
         """用来完成整体的控制"""
@@ -107,7 +105,6 @@ class WSGIServer(object):
 
             new_socket.close()
 
-
         # 关闭监听套接字
         self.tcp_server_socket.close()
 
@@ -120,4 +117,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
