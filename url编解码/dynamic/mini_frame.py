@@ -42,6 +42,7 @@ def index(ret):
     conn.close()
 
     tr_template = """<tr>
+
         <td>%s</td>
         <td>%s</td>
         <td>%s</td>
