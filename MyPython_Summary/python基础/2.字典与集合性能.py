@@ -136,3 +136,14 @@ print("time elapse using set: {}".format(end_using_set - start_using_set))
 # 计算这个元素应该插入哈希表的位置 index = hash(key) & mask。如果哈希表中此位置是空的，那么这个元素就会被插入其中
 # 查找操作：和前面的插入操作类似，Python 会根据哈希值，找到其应该处于的位置
 # 删除操作：对于删除操作，Python 会暂时对这个位置的元素，赋于一个特殊的值，等到重新调整哈希表的大小时，再将其删除
+
+# 字符串去重
+test_str = 'csabhhbsbjkakasyysnksnnalllqwiopxsan'
+length = len(test_str)
+key = [x for x in test_str]
+value = [x for x in range(length)]
+product = list(zip(key, value))
+dic = dict(product)
+for i in dic:
+    print(i, end="")
+
