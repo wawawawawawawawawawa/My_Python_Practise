@@ -7,7 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/WSGI_mini-web框架/2.web服务器里集成了解析动态请求的功能" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/WSGI_mini-web框架/2.web服务器里集成了解析动态请求的功能/test" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8.2 (C:\Users\LiuWenJing\AppData\Local\Programs\Python\Python38\python.exe)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (My_Python_Practise)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">

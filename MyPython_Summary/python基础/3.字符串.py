@@ -49,3 +49,13 @@ data = query_data(namespace, table)
 # 通常，我们使用一个字符串作为模板，模板中会有格式符，这些格式符作为后续真实值预留位置，以呈现出真实值应该呈现的格式，通常用于程序的输出。logging等
 print('no data available for person with id:{},name:{}'.format(id, name))
 # 其中的string.format(),就是所谓的格式化函数；而大括号{}就是所谓的格式符，用来为后面的真实值，变量name预留位置
+
+
+# replace用于字符串的替换
+print("I love python".replace(' ', '_'))
+
+# title用于字符串首字符的大写
+print("i love python".title())
+
+# find用于返回匹配字符串起始位置的索引
+print("i love python".find('python'))

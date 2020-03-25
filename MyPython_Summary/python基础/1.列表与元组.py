@@ -8,6 +8,9 @@ l[3] = 40  # l[3]表示访问第四个元素，这里可以修改第四个元素
 tup = (1, 2, 3, 4)
 tup[3] = 40  # 这里会报错，因为元组没法修改元素的值
 
+# 需要注意的是，单元素元组末尾必须加一个逗号，不然会被认为是元素本身
+tup_singer = (1, )
+
 # 如果想对已有的元组做任何改变只能重新开辟一块内存，创建新的元组，而列表只需要简单得在末尾加入对应元素
 tup = (1, 2, 3, 4)
 new_tup = tup + (5,)
@@ -41,3 +44,27 @@ tuple([1, 2, 3])
 
 
 # list和tuple的内部实现都是array的形式，list因为可变，所以是一个over-allocate的array，tuple因为不可变，所以长度大小固定
+
+
+# 去最求平均,这里的round是四舍五入，round(number, digits) digits是保留小数位数
+def socre_mean(lst):
+    lst.sort()
+    lst2 = lst[1:-1]
+    return round(sum(lst2)/len(lst2), 1)
+
+# 使用sample，从100个样本中随机抽样10个
+# simple(序列a, n):从序列a中随机的抽取n个元素，并将这n个元素以list形式返回
+from random import randint,sample
+lst = [randint[0, 50] for _ in range(100)]
+lst_sample = sample(lst, 10)
+
+# 列表的方法：
+# insert[number, item]:在number索引出插入
+# pop：末尾弹出
+# remove(item):移除item
+
+# 切片
+a = list(range(1, 20, 3))   # 利用range(start, stop, step)生成数列数据并转换为列表
+# 使用 a[1:5:2] 生成索引 [1,5) 但步长为 2 的切片 [4,10]
+# 使用 a[::3] 生成索引 [0,len(a)) 步长为 3 的切片 [1,10,19]
+# 使用 a[::-3] 生成逆向索引 [len(a),0) 步长为 3 的切片 [19,10,1]  逆向：从列表的最后一个元素访问列表的第一个元素的方向

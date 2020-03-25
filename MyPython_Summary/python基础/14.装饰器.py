@@ -5,6 +5,7 @@ import time
 def func(message):
     print('Got a message:{}'.format(message))
 
+
 send_message = func
 send_message('hello world1')
 # 函数可以作为对象赋予变量
@@ -17,6 +18,7 @@ def func1(message):
 def root_call(func, message):
     print(func(message))
 
+
 root_call(func1, 'hello world2')
 # 函数可以作为参数传入另一个函数
 
@@ -25,6 +27,8 @@ def func3(message):
     def get_message(message):
         print('Got a message:{}'.format(message))
     return get_message(message)
+
+
 func3('hello world3')
 # 可以在函数里定义函数，就是函数的嵌套
 
@@ -166,7 +170,19 @@ def calculate_similarity(items):
 # 所谓装饰器，就是通过装饰器函数，来修改原函数的一些功能，使得原函数不需要修改
 
 
+# @property装饰器，使得类方法变为只读属性
+class Book(object):
+    def __init__(self, name, sale):
+        self.__name = name
+        self.__sale = sale
 
+    @property
+    def name(self):
+        return self.__name
+
+
+a_book = Book('Test Book', 1000)
+print(a_book.name)
 
 
 
