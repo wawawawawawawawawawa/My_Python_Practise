@@ -68,3 +68,133 @@ a = list(range(1, 20, 3))   # 利用range(start, stop, step)生成数列数据�
 # 使用 a[1:5:2] 生成索引 [1,5) 但步长为 2 的切片 [4,10]
 # 使用 a[::3] 生成索引 [0,len(a)) 步长为 3 的切片 [1,10,19]
 # 使用 a[::-3] 生成逆向索引 [len(a),0) 步长为 3 的切片 [19,10,1]  逆向：从列表的最后一个元素访问列表的第一个元素的方向
+
+
+# list和tuple的经典使用
+# 1.判断list内有无重复元素
+def is_duplicated(lst1):
+    return len(lst1) != len(set(lst))
+
+
+# 2.列表反转
+def reverse(lst2):
+    return lst2[::-1]
+
+
+# 3.找出列表中所有重复元素
+def find_duplicated(lst3):
+    ret = []
+    for i in lst3:
+        if lst3.count(i) > 1 and i not in ret:
+            ret.append(i)
+        return ret
+
+
+# 4.斐波那契数列
+# 普通实现版
+def fibonacci(n):
+    if n <= 1:
+        return [1]
+    fib = [1, 1]
+    while len(fib) < n:
+        fib.append(fib[len(fib)-1] + fib[len(fib)-2])
+    return fib
+
+
+# 生成器版
+def finonacci1(n):
+    a, b = 1, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+
+# 5.出镜最多
+# max函数时内置函数，不需要导入，max有一个key参数，指定如何进行值的比较
+def mode(lst5):
+    if lst5 is None or len(lst5) == 0:
+        return None
+    return max(lst5, key=lambda v: lst5.count(v))
+
+
+lst = [1, 5, 4, 9, 7, 8]
+r = mode(lst)
+print(f'{lst}中出现最多的元素为{r}')
+
+
+# 支持返回多个
+def mode__multi(lst5):
+    if lst5 is None or len(lst5) == 0:
+        return None
+    max_freq_elem = max(lst5, key=lambda v: lst5.count(v))
+    max_freq = len(max_freq_elem)
+    ret = []
+    for i in lst5:
+        if i not in ret and lst5.count(i) == max_freq:
+            ret.append(i)
+    return ret
+
+
+# 6.更长列表，其中 * 是可变参数，意味着能传入多个位置参数,key定义函数怎么比较大小，lambda的参数V是lists中的一个元素
+def max_len(*lst6):
+    return max(*lst6, key=lambda v: len(v))
+
+
+r = max_len([1, 2, 3], [4, 5, 6, 7], [8])
+print(f'更长的列表是{r}')
+
+
+# 7.求表头，返回列表的第一个元素，如果为空时返回None,注意if else的这种简单写法
+def head(lst7):
+    return lst7[0] if len(lst7) > 0 else None
+
+
+# 8.求表尾
+def tail(lst8):
+    return lst8[-1] if len(lst8) > 0 else None
+
+
+# 9.打印乘法表
+def mul_table():
+    for i in range(10):
+        for j in range(i + 1):
+            print(str(j) + "*" + str(i) + "=" + str(i*j), end="\t")
+        print()  # 打印一个换行
+
+
+mul_table()
+
+
+# 10.重洗数据集
+# random中的shuffle函数，能冲洗数据，他是对输入列表就地洗牌，节省存储空间，所谓冲洗就是将序列中的所有元组随机排序
+from random import shuffle
+lst10 = [randint(0, 50) for _ in range(100)]
+shuffle(lst10)
+
+
+# 11.生成满足均匀分布的坐标点
+from pyecharts.charts import Scatter
+import pyecharts.options as opts
+from random import uniform
+
+
+def draw_uniform_points():
+    x, y = [i for i in range(100)], [
+        round(uniform(0, 10), 2) for _ in range(100)]
+    print(y)
+    c = (
+        Scatter()
+        .add_xaxis(x)
+        .add_yaxis('y', y)
+    )
+    c.render()
+
+
+draw_uniform_points()
+
+# 导入相关图表包
+# 进行图表的基础设置，创建图表对象
+# 利用add()方法进行数据输入与图表设置(可以使用print_echarts_options()来输出所有可配置项)
+# 利用render()方法来进行图表保存
+# 有很多种图，中文版手册在pyecharts
+

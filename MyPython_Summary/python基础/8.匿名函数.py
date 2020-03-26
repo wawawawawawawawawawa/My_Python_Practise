@@ -26,11 +26,13 @@ squared = map(lambda x: x**2, [1, 2, 3, 4])
 # Python的函数式编程：所谓的函数式编程，是指代码中每一块都是不可变的(immutable),都由纯函数(pure function)的形式组成。这里的
 # 纯函数是指函数本身相互独立，互不影响，对于相同的输入总有相同的输出
 
+
 # 列表的值加倍非纯函数版本,这里会改变源列表，所以每次得到的结果不一样
 def multiply_2(l):
     for index in range(len(l)):
         l[index] *= 2
     return l
+
 
 # 纯函数版本是创建一个新的列表，使得每次的结果一致
 def multiply_2_pure(l):
@@ -38,6 +40,7 @@ def multiply_2_pure(l):
     for item in l:
         new_list.append(item)
     return new_list
+
 
 # filter函数：filter(function,iterable)函数和map函数类似，他是返回True或者False,最后将返回True的元素组成一个新的可遍历的集合
 # 举个栗子，比如要返回一个列表中所有的偶数

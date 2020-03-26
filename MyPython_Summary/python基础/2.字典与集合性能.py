@@ -147,3 +147,124 @@ dic = dict(product)
 for i in dic:
     print(i, end="")
 
+# 遍历字典以及获取所有键,值集合
+d = {'a':1,'b':2,'c':3}
+for key, value in d.items():
+    print(key, value)
+
+# 获取所有键的集合
+print(set(d))
+print(set(d.keys()))
+
+# 获取所有值的集合
+print(set(d.values()))
+
+# 字典视图
+# 字典自带的三个方法 d.items()、d.keys()、d.values()，分别返回字典元素集，键的集合以及值的集合
+# 他们都是原字典的视图，修改原字典对象，视图对象的值也会改变
+
+# 字典值的范围
+# 可哈希的对象才能作为字典的键，不可变对象才是可哈希的，所以可变对象不能作为字典的键
+
+# 集合的范围
+# 可哈希的对象才能作为集合的元素，不可变对象才是可哈希的，所以可变对象不能作为字典的键
+
+# set自带的方法与数学中的集合操作比较类似，提供查找集合间并，交，差集，子集判断
+# 求并集
+a = {1, 3, 5, 7}
+b, c = {3, 4, 5, 6}, {6, 7, 8, 9}
+a.union(b, c)
+# 求差集
+d = a.difference(b, c)
+# 求交集
+e = a.intersection(b, c)
+# a 是 b的子集吗？
+print(a.issubset(b))
+
+# 字典与集合的使用
+# 1.update:实现批量插入键值对到已有字典中
+d = {'a': 1, 'b': 2}
+d.update({'c': 3, 'e': 4})
+
+# 2.setdefault:仅当字典中不存在某个键值对时才插入到字典中，如果存在，不必插入(也就不会修改键值对)
+r = d.setdefault('c', 33) # 因为已经存在了c的键值对，所以这里值不会更新
+
+
+# 3.字典并集：{**d1, **d2}实现合并d1和d2，返回一个字典
+def merge(d1, d2):
+    return {**d1, **d2}
+
+
+print(merge({'a': 1, 'b': 2}, {'c': 3}))
+
+
+# 4.字典差
+def difference(d1, d2):
+    return dict([(k, v) for k, v in d1.items() if k not in d2])
+
+
+# 5.按键排序
+def sort_by_key(d):
+    return sorted(d.items(), key=lambda x: x[0])
+
+
+# 6.按值排序
+def sort_by_value(d):
+    return sorted(d.items(), key=lambda x: x[1])
+
+
+# 7.最大键
+def max_key(d):
+    if len(d) == 0:
+        return []
+    max_key1 = max(d.keys())
+    return (max_key1, d[max_key1])
+
+
+# 8.最大值,注意这里的最大值可能不止一个
+def max_value(d):
+    if len(d) == 0:
+        return []
+    max_val = max(d.values())
+    return [(key, max_val) for key in d if d[key] == max_val]
+
+
+# 9.集合最值，找到最大最小值，装到元组返回
+def max_min(s):
+    return (max(s), min(s))
+
+
+# 10.更长集合:按照元素长度比较大小，找出更长的集合
+def longer(s1, s2):
+    return max(s1, s2, key=lambda x: len(x))
+
+
+# 11.重叠最多：在两个列表中，找出重叠次数最多的元素，默认只返回一个
+def max_overlap(lst1, lst2):
+    overlap = set(lst1).intersection(lst2)
+    ox = [(x, min(lst1.count(x), lst2.count(x)) for x in overlap)]
+    return max(ox, key=lambda x: x[1])
+
+
+# 12.topn:找出字典前n个最大值,对应的键
+from heapq import nlargest
+
+
+def top_dict(d, n):
+    return nlargest(n, d, key=lambda k: d[k])
+
+
+# 13.一键多值字典
+d = {}
+lst = [(1, 'apple'), (2, 'orange'), (1, 'compute')]
+for k, v in lst:
+    if k not in d:
+        d[k] = []
+    d[k].append(v)
+
+
+# 这里有一处if判断，不是很优雅，可以使用collections中的defaultdict
+from collections import defaultdict
+d = defaultdict(list)
+for k, v in lst:
+    d[k].append(v)
