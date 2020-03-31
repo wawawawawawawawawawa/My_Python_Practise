@@ -36,7 +36,89 @@ print(re.sub(r'\s+', '_', text))
 
 # 注意：re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，函数返回None；而re.search匹配整个字符串，直到找到一个匹配。
 
+# 反转字符串
+s = "python"
+# 方法一
+rs = ''.join(reversed(s))
+print(rs)
+# 方法二
+rs = s[::-1]
+print(rs)
 
+# 字符串的替换，使用repalce方法
+s = "i love python".replace('o', '0')
+print(s)
+
+# 子串判断
+# 方式1：使用in
+a = 'our'
+b = 'flourish'
+print(a in b)
+# 方式2：使用find方法，返回字符串b中匹配子串a的最小索引,如果不是子串，会返回 -1
+print(b.find(a))
+
+# 正则表达式常用的通用字符：
+# \s 匹配空白字符
+# \w 匹配任意字母/数字/下划线
+# \W 和小写 w 相反，匹配任意字母/数字/下划线以外的字符
+# \d 匹配十进制数字
+# \D 匹配除了十进制数以外的值
+# [0-9] 匹配一个 0~9 之间的数字
+# [a-z] 匹配小写英文字母
+# [A-Z] 匹配大写英文字母
+
+# 使用search方法，找出子串的第一个匹配位置
+r = re.search(a, b)
+print(r.span())  # 这里是以tuple()的形式返回范围,这里匹配不到的话会直接抛异常
+
+# finditer匹配迭代器：使用正则模块，finditer方法，返回所有子串匹配位置的迭代器
+# 通过返回对象re.Match，使用它的方法span找出匹配的位置
+s = "1乘以1结果还是1"
+pat = '1'
+r = re.finditer(pat, s)
+for i in r:
+    print(i)
+
+# findall：findall方法能查找出子串的所有匹配
+s = '一共20行代码运行时间13.59s'
+pat = r'\d+'
+r = re.findall(pat, s)
+print(r)  # ['20', '13', '59']
+
+# 会发现没有找到期望的13.59，可以使用表达式 r'\d+\.?\d+'
+s = '一共2行代码运行时间13.59s'
+pat = r'\d+\.?\d+'
+r1 = re.findall(pat, s)
+print(r1)  # ["13.59"]
+
+# 会发现没有匹配到2，因为表达式中的 \d+表示至少两位数，所以应该改成 \d*才可以
+
+# 匹配正整数
+s = [-16, 1.5, 11.43, 10, 5]
+pat = r'^[1-9]\d*$'
+print([i for i in s if re.match(pat, str(i))])
+
+# re.I忽略大小写
+s = 'That'
+pat = r't'
+r = re.finditer(pat, s, re.I)
+for i in r:
+    print(i.span())
+
+# 分隔复杂的字符串
+s = 'This,,,   module ; \t   provides|| regular ; '
+pat = r'[,\s;|]+'
+word = re.split(pat, s)
+print(word)
+
+# 贪心与非贪心捕获
+content = '''<h>ddedadsad</h><div>graph</div>bb<div>math</div>'''
+# 比如要捕获<div>中的内容,使用贪心捕获的话 (.*)表示捕获任意多的字符，尽可能多的匹配字符
+pat = r'<div>.*</div>'
+print(re.findall(pat, content))
+# 如果使用非贪心捕获的话  (.*?)就可以严格捕获区间的内容
+pat = r'<div>(.*?)</div>'
+print(re.findall(pat, content))
 
 
 
