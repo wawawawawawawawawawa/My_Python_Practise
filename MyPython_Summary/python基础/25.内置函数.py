@@ -49,12 +49,129 @@ ascii(xiaoming)
 
 # bin(x): 将10进制转换为二进制
 print("{}转换为二进制为{}".format(10, bin(10)))
-print(f'10转换为二进制为{bin(10)}')
+# print(f'10转换为二进制为{bin(10)}')
 
 # oct(x): 将10进制转换为八进制
 print("{}转换为八进制为{}".format(10, oct(10)))
-print(f'10转换为八进制为{oct(10)}')
+# print(f'10转换为八进制为{oct(10)}')
 
 # hex(x): 将10进制转换为十六进制
 print("{}转换为十六进制为{}".format(10, hex(10)))
-print(f'10转换为十六进制为{hex(10)}')
+# print(f'10转换为十六进制为{hex(10)}')
+
+
+# 函数作用域，查找顺序遵守LEGB规则
+# 优先从它所属函数(local)内查找
+# 若找不到，且他位于一个内嵌函数中，就再到它的父函数(enclosing)中查找
+# 如果还找不到，再去全局作用域(global)查找
+# 如果还找不到，再去内置作用域(build-in)查找
+# 还是找不到，报错
+
+
+# bytes([source[,encoding[,errors]]]):将一个字符串转换成字节类型
+s = "apple"
+print(bytes(s, encoding='utf-8'))
+
+# str(object=''):将字符类型，数值类型等转换为字符串类型
+i = 100
+print(str(i))
+
+
+# chr(i):查看十进制数对应的ASCLL字符
+# ord(c):查看某个ASCLL字符对应的十进制数
+print(chr(65), ord('A'))
+
+
+# dict():创建数据字典
+# dict(**kwarg)
+# dict(mapping, **kwarg)
+# dict(iterable, **kwarg)
+print(dict())
+print(dict(a = 'a', b = 'b'))
+print(dict(zip(['a', 'b'], [1, 2])))
+print(dict([('a', 1), ('b', 2)]))
+
+
+# frozenset([iterable]):创建一个不可修改的冻结集合，一旦创建不允许增删元素
+print(frozenset([1, 2, 2, 5, 6, 5]))
+print(isinstance(frozenset([1, 2, 2, 5, 6, 5]),frozenset))#它不是一个set对象，是一个frozenset对象
+
+
+# 普通的set创建后可以使用add方法再插入元素，也可以使用pop方法移除集合的第一个
+
+# list([iterable]):返回可变序列类型：列表
+m = map(lambda i: str(i),[188, 22, 88])   # 这里将列表内的每个元素都转换为字符串类型
+list(m)
+
+
+# range(stop);range(start, stop [,step]):生成不可变序列
+a = [1,4,2,3,1]
+for i in range(0,len(a),2):
+	print(a[i])
+# slice(stop);slice(start,stop, [,step]):返回一个由range(start, stop, step) 所指定索引集的 slice 对象
+# print(a[slice[0, 5, 2]])
+# print(a[slice[2]])
+
+
+# tuple([iterable]):创建一个不可修改的元租对象
+# type(object):查看对象的类型的函数
+
+
+# zip(*iterable):创建一个迭代器，聚合每个可迭代对象的元素
+a = range(5)
+b = list('abcde')
+print([(x,y) for x, y in zip(a, b)])
+
+# classmethod:classmethod修饰符对应的函数不需要实例化，不需要self参数
+# 第一个参数需要是表示自身类的cls参数，能调用类的属性，方法，实例等
+
+
+# delattr(object, name):删除对象的属性，在不需要某个或某些属性时，就用这个方法
+class Student():
+	def __init__(self, id = None, name = None):
+		self.id = id
+		self.name = name
+
+xiaoming = Student(1, '小明')
+delattr(xiaoming, 'id')
+print(hasattr(xiaoming,'id'))
+
+# getattr(object,name[,default]):获取对象的属性
+# isinstance(object, classinfo):判断object是不是类classinfo的实例
+print(isinstance(xiaoming, Student))
+
+
+# issubclass(class, classinfo):判断class是不是classinfo的子类
+# classinfo取值可能为元组，若class是元组内某个元素类型的子类，也会返回True
+print(issubclass(int, (int, float)))
+
+
+# callable:判断对象是不是可被调用，能被调用的对象就是一个callable对象，比如函数str，int等都是可被调用的
+# 如果一个类生成的实例想要可以被调用，必须从写__call__方法：
+class Student():
+	def __init__(self, id = None, name = None):
+		self.id = id
+		self.name = name
+
+	def __call__(self):
+		print("i can be called")
+
+
+t = Student(2, "哈哈")
+print(callable(t))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
