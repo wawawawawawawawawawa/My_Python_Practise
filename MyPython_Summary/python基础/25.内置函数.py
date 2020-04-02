@@ -161,6 +161,83 @@ t = Student(2, "哈哈")
 print(callable(t))
 
 
+# 五个常用的高阶函数
+# 1.filter(function,iterable):过滤掉不满足函数function的元素，重新返回一个迭代器
+class Student():
+	def __init__(self, name, sex, height):
+		self.name = name
+		self.sex = sex
+		self.height = height
+
+
+def height_condition(stu):
+	if stu.sex == 'male':
+		return stu.height > 1.75
+	else:
+		return stu.height > 1.65
+
+
+students = [Student('xiaoming', 'male', 1.74),
+			Student('xiaohong', 'female', 1.68),
+			Student('xiaoli', 'male', 1.80)]
+
+students_satisfy = filter(height_condition, students)
+for stu in students_satisfy:
+	print(stu.name)
+
+# 2.map(function,iterable,...):将function映射于iterable中的每一项，并返回一个新的迭代器
+mylst = [1, 2, 3, 4, 5]
+result = map(lambda x: x + 1, mylst)
+for i in result:
+	print(i)
+
+# map函数支持传入多个可迭代对象，输出元素个数等于较短序列长度
+# 找到同时满足第一个列表的元素为奇数，第二个列表对应位置的元素为偶数的元素
+xy = map(lambda x, y: x % 2 == 1 and y % 2 == 0, [1, 3, 2, 4, 1], [3, 2, 1, 2])
+for i in xy:
+	print(i)
+
+
+# 利用map实现加法运算
+def vector_add(x, y):
+	return list(map(lambda i, j: i + j, x, y))
+
+
+lst1 = [1, 2, 3, 4, 5, 6]
+lst3 = [1, 2]
+print(vector_add(lst1, lst3))
+
+# 3.reduce(function，iterable[,initializer])
+# 实现规约
+# reduce函数中第一个参数是function，function函数，参数必须为2，是可迭代对象iterable中连续两项
+# 计算过程从左到右依次规约，直到最终为单个值并返回
+from functools import reduce
+
+print(reduce(lambda x, y: x + y, list(range(10))))
+
+# 4.reversed(seq):重新生成一个反向迭代器，对输入的序列实现反转
+
+
+# 5.sorted(iterable,*,key=None,reverse=False):实现对序列化对象的排序
+# key参数和reverse参数必须为关键字参数，都可省略
+# 如果可迭代对象的元素也是一个复合对象(如字典)，那么sorted的key函数就会被用到
+a = [{'name': 'xiaoming', 'age': 20, 'gender': 'male'},
+	 {'name': 'xiaohong', 'age': 18, 'gender': 'female'},
+	 {'name': 'xiaoli', 'age': 19, 'gender': 'male'}]
+
+print(sorted(a, key=lambda x: x['age'], reverse=False))
+
+# 迭代器
+# iter(object):返回一个严格意义上的可迭代对象
+# 只要 iterable 对象支持可迭代协议，即自定义了__iter__函数，便都能配合for依次迭代输入其元素
+# next(iterator,[,default]):返回可迭代对象的下一个元素
+it = iter([1, 2, 3, 4])
+print(next(it))
+# enumerate(iterable,start=0):返回可枚举对象，也是一个迭代器
+s = ["a", "b", "v"]
+for i, v in enumerate(s):
+	print(i, v)
+
 
 
 

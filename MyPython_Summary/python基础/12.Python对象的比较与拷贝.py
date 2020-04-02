@@ -12,7 +12,6 @@ c = 2577
 d = 2577
 print(c is d)  # 这里有点问题，试验是一直相等，需要进一步确认
 
-
 # 比较操作符'is'的速度效率，通常要优于'=='.因为'is'操作符不能被重载，这样Python就不用去寻找程序中是否有其他地方重载了比较
 # 操作符，而调用'is'就仅仅是比较两个变量的ID而已
 
@@ -36,6 +35,7 @@ l2 = l1[:]
 print(l1 is l2)  # False
 # Python中也提供了相应的函数copy.copy()
 import copy
+
 l1 = [1, 2, 3]
 l2 = copy.copy(l1)
 print(l1 is l2)  # False
@@ -47,10 +47,11 @@ print(t1 is t2)  # True
 
 # 浅拷贝是指重新分配一块内存你，创建一个新的对象，里面的元素是原对象中子对象的引用，因此如果原对象中的元素可变，浅拷贝通常会带来一些副作用
 import copy
+
 l1 = [[1, 2], (30, 40)]
 l2 = copy.copy(l1)
 l1.append(100)  # 这里对l1列表新增元素100，不会影响到l2，因为整体是两个不同的对象，不共享内存地址
-l1[0].append(3) # 这里由于l2是l1的浅拷贝，l2中的第一个元素和l1中的第一个元素共同指向一个列表，所以会改变l1和l2
+l1[0].append(3)  # 这里由于l2是l1的浅拷贝，l2中的第一个元素和l1中的第一个元素共同指向一个列表，所以会改变l1和l2
 # l2[0].append(4)
 print(l1)
 print(l2)
@@ -68,9 +69,47 @@ print(l1)
 print(l2)
 
 
+# in用于成员检测
+# python内置的序列类型，字典类型和集合类型，都支持in操作。对于字典类型in操作判断i是否是字典的键
+# 对于自定义类型，判断是否位于序列类型中，需要重写序列类型的魔法方法 __contains__
+# 以一个下划线开头的实例变量名，比如_age，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当看到这样的变量时，意思是，"虽然可以被访问，但是，请视为私有变量，不要随意访问。
+
+class Student():
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, val):
+        self._name = val
 
 
+class Students(list):
+    def __contains__(self, stu):
+        for s in self:
+            if s.name == stu.name:
+                return True
+        return False
 
+
+s1 = Student('xiaoming')
+s2 = Student('xiaohao')
+a = Students()
+a.extend([s1, s2])
+s3 = Student('xiaoming')
+print(s3 in a)
+
+# extend和append的区别
+# list.append(arg1)参数类型任意，可以往已有列表中添加元素，若添加的是列表，就把该列表当成一个元素存在原列表中，只使list长度增加1
+# list.extend(list1):参数必须是列表类型，可以将参数中的列表合并到原列表的末尾，使原来的 list长度增加len(list1)。
+lst = [1, 2]
+lst.append([3, 4])
+print(lst)
+lst.extend([3, 4])
+print(lst)
 
 
 

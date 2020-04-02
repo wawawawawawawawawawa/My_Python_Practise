@@ -12,17 +12,20 @@ def is_iterable(param):
         return True
     except TypeError:
         return False
+
+
 params = [
     1234,
     '1234',
     [1, 2, 3, 4],
     set([1, 2, 3, 4]),
-    {1:1, 2:2, 3:3, 4:4},
+    {1: 1, 2: 2, 3: 3, 4: 4},
     (1, 2, 3, 4)
 ]
 
 for param in params:
     print('{} is iterable? {}'.format(param, is_iterable(param)))
+
 
 # 生成器是懒人版本的迭代器
 # 声明一个迭代器很简单，[i for i in range(100000000)]就可以生成一个包含一亿个元素的列表，每个元素生成呼都会保存到内存中，会占用巨量内存
@@ -31,12 +34,14 @@ for param in params:
 # 给定一个列表和一个数字，求这个数字在列表中的位置
 
 
-def index_normal(L, target):   # 普通版
+def index_normal(L, target):  # 普通版
     result = []
     for i, num in enumerate(L):
         if num == target:
             result.append(i)
     return result
+
+
 print(index_normal([1, 6, 5, 2, 4, 2, 6], 6))
 
 
@@ -45,7 +50,10 @@ def index_generator(L, target):
         if num == target:
             yield i
 
+
 print(list(index_generator([1, 6, 5, 2, 4, 2, 6], 6)))
+
+
 # yield是魔法的关键，函数运行到这一行会暂停，跳到下一次next()函数，当next()还是调用的时候，暂停的程序继续向下执行，yield后面接的是它的返回值
 # index_generator会返回一个Generator对象，需要使用list转换为列表后，才能使用print输出
 
@@ -55,6 +63,8 @@ print(list(index_generator([1, 6, 5, 2, 4, 2, 6], 6)))
 def is_subsequence(a, b):
     b = iter(b)
     return all(i in b for i in a)
+
+
 print(is_subsequence([1, 3, 5], [1, 2, 3, 4, 5]))
 print(is_subsequence([1, 4, 3], [1, 2, 3, 4, 5]))
 
@@ -73,7 +83,61 @@ print(2 in b)
 print(4 in b)
 print(3 in b)
 
+
 # (i for i in a)产生一个生成器，这个生成器可以遍历对象a
 # all() 判断一个迭代器元素是否全部为True
 
 
+# send函数：会传值给yield左侧的变量
+def f():
+    print('enter f...')
+    while True:
+        result = yield 4
+        if result:
+            print('send me a value {}'.format(result))
+            return
+        else:
+            print('no send')
+
+
+g = f()  # 创建生成器对象，什么都不打印
+print(next(g))  # 进入f，打印 enter f...，并yield后返回值4，并打印4
+print(g.send(10))  # send值10赋值给result，执行到上一次yield语句的后一句打印出send me a value 10
+
+
+# 遇到return后返回，同时因为f是生成器，同时提示StopIteration
+
+
+# 完全展开list
+def deep_flatten(lst):
+    for i in lst:
+        if type(i) == list:
+            yield from deep_flatten(i)
+        else:
+            yield i
+
+
+gen = deep_flatten([1, ['s', 3], 4, 5])
+for i in gen:
+    print(i)
+
+# yiled from 表示再进入到deep_flatten生成器
+
+
+# 列表分组
+from math import ceil
+
+
+def divide_iter(lst, n):
+    if n <= 0:
+        yield lst
+        return
+
+
+    i, div = 0, ceil(len(lst) / n)
+    while i < n:
+        yield lst[i * div: (i + 1 * div)]
+        i + 1
+
+list(divide_iter([1, 2, 3, 4, 5], 0))
+list(divide_iter([1, 2, 3, 4, 5], 2))
