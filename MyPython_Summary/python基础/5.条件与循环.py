@@ -108,10 +108,10 @@ values = [['jason', '2000-01-01', 'male'],
 #
 # # 方式一
 for index in range(0, len(values)):
-    print(dict(list(zip(attributes, values[index]))))
+    print(dict(zip(attributes, values[index])))
 
 # 方式二
-print([dict(list(zip(attributes, values[index]))) for index in range(0, len(values))])
+print([dict(zip(attributes, values[index])) for index in range(0, len(values))])
 
 # 方式三
 dic = {}

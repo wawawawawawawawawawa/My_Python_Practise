@@ -102,7 +102,7 @@ def fibonacci(n):
 
 
 # 生成器版
-def finonacci1(n):
+def fibonacci1(n):
     a, b = 1, 1
     for _ in range(n):
         yield a
@@ -119,7 +119,7 @@ def mode(lst5):
 
 lst = [1, 5, 4, 9, 7, 8]
 r = mode(lst)
-print(f'{lst}中出现最多的元素为{r}')
+# print(f'{lst}中出现最多的元素为{r}')
 
 
 # 支持返回多个
@@ -141,7 +141,7 @@ def max_len(*lst6):
 
 
 r = max_len([1, 2, 3], [4, 5, 6, 7], [8])
-print(f'更长的列表是{r}')
+# print(f'更长的列表是{r}')
 
 
 # 7.求表头，返回列表的第一个元素，如果为空时返回None,注意if else的这种简单写法
